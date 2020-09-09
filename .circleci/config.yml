@@ -2,16 +2,14 @@ version: 2.1
 orbs:
   cypress: cypress-io/cypress@1
 
-jobs:
- run-ui-tests:
-   machine: true
-   steps:
-     - checkout
-     - run: |
-         script/run_ui_tests.sh
-
+executors:
+  default:
+    machine:
 
 workflows:
   build:
     jobs:
-      - run-ui-tests
+      - cypress/run:
+          executor: default
+          start: docker run -p 3000:3000  metabase/metabase
+          wait-on: 'http://localhost:3000'

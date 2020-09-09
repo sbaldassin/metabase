@@ -12,3 +12,7 @@ jobs:
      - run: |
          npm instal
          scripts/run_ui_tests.sh
+workflows:
+  default:
+    jobs:
+      - test

@@ -14,4 +14,4 @@ jobs:
 workflows:
   build:
     jobs:
-      - run_ui_tests
+      - run-ui-tests

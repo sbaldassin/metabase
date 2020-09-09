@@ -3,18 +3,12 @@ orbs:
   cypress: cypress-io/cypress@1
 
 jobs:
-  ui-tests:
-    machine:
-      image: ubuntu-1604:202007-01
-    steps:
-      - checkout
-      - cypress/install
-      - cypress/run:
-          start: docker run -p 3000:3000  metabase/metabase
-          wait-on: 'http://localhost:3000'
-
-
-workflows:
-  tests:
-    jobs:
-      - ui-tests
+ test:
+   machine: true
+   steps:
+     - checkout
+     # start proprietary DB using private Docker image
+     # with credentials stored in the UI
+     - run: |
+         npm instal
+         scripts/run_ui_tests.sh

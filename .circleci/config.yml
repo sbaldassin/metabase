@@ -7,6 +7,7 @@ jobs:
  api-test:
    machine:
      image: ubuntu-1604:201903-01
+     resource_class: large
    steps:
       - checkout
       - run:

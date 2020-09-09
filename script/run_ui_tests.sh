@@ -1,2 +1,2 @@
  #!/bin/bash
- docker-compose -f docker-compose-e2e.yml up --exit-code-from cypress
+ docker-compose -f docker-compose-ui.yml up --exit-code-from cypress

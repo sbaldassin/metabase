@@ -9,11 +9,15 @@ jobs:
    steps:
       - checkout
       - run:
-          name: Install node@v8.11.3
           command: |
-            ./load-nvm.sh
-            nvm install v6.14.7
-            nvm alias default v6.14.7
+            echo 'export NVM_DIR="/opt/circleci/.nvm"' >> $BASH_ENV
+            echo ' [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> $BASH_ENV
+      - run: nvm install 10
+      - run: node -v
+      - run: npm -v
+      - run: npm i -g npm@6.9.0
+      - run: npm -v
+      - run: nvm alias default 10
       - cypress/install
       - run:
           name: "Run api tests"
@@ -32,4 +36,3 @@ workflows:
   default:
     jobs:
       - api-test
-      - ui-test

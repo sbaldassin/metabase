@@ -3,8 +3,8 @@ services:
   metabase:
     image: metabase/metabase
   cypress:
-    entrypoint: bash -c "sleep 30 && cypress run --spec /e2e/cypress/integration/metabase-ui-test.js"
-    image: "cypress/included:3.2.0"
+    entrypoint: bash -c "npm install --save-dev cypress && npx cypress run --spec /e2e/cypress/integration/metabase-ui-test.js"
+    image: pepe
     ipc: host
     environment:
       - CYPRESS_baseUrl=http://metabase:3000

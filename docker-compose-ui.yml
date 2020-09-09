@@ -3,7 +3,7 @@ services:
   metabase:
     image: metabase/metabase
   cypress:
-    entrypoint: bash -c "npm install --save-dev cypress && npx cypress run --spec /e2e/cypress/integration/metabase-ui-test.js"
+    entrypoint: bash -c "npm install --save-dev cypress && sleep 30 && npx cypress run --spec /e2e/cypress/integration/metabase-ui-test.js"
     image: cypress/base:10
     ipc: host
     environment:

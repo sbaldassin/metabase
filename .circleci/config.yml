@@ -8,7 +8,7 @@ jobs:
       - run:
           name: "Run api tests"
           command: |
-            scripts/run_api_tests.sh
+            script/run_api_tests.sh
  ui-test:
    machine: true
    steps:
@@ -16,7 +16,7 @@ jobs:
       - run:
           name: "Run ui tests"
           command: |
-            scripts/run_ui_tests.sh
+            script/run_ui_tests.sh
 workflows:
   default:
     jobs:

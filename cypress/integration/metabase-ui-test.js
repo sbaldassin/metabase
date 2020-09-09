@@ -1,6 +1,7 @@
 describe('Metabase UI tests', () => {
     it('Simple query', () => {
       cy.provisionMetabase().then(token => {
+        cy.clearCookies({ timeout: 30000 });
         cy.visit("/", { timeout: 30000 });
         cy.get('input[name="username"]').type("pepe@balda.com");
         cy.get('input[name=password]').type("Pepe123");

@@ -1,10 +1,14 @@
 version: 2.1
 
+orbs:
+  cypress: cypress-io/cypress@1
+
 jobs:
  api-test:
    machine: true
    steps:
       - checkout
+      - cypress/install
       - run:
           name: "Run api tests"
           command: |
@@ -13,6 +17,7 @@ jobs:
    machine: true
    steps:
       - checkout
+      - cypress/install
       - run:
           name: "Run ui tests"
           command: |

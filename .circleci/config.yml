@@ -1,22 +1,24 @@
 version: 2.1
-orbs:
-  cypress: cypress-io/cypress@1
 
 jobs:
- test:
+ api-test:
    machine: true
    steps:
       - checkout
       - run:
-          name: "Update Node.js and npm"
+          name: "Run api tests"
           command: |
-            wget -qO- https://deb.nodesource.com/setup_10.x | sudo -E bash && \
-                apt-get install -y nodejs && \
-                node -v && \
-                npm install -g yarn
-            npm install
+            scripts/run_api_tests.sh
+ ui-test:
+   machine: true
+   steps:
+      - checkout
+      - run:
+          name: "Run ui tests"
+          command: |
             scripts/run_ui_tests.sh
 workflows:
   default:
     jobs:
-      - test
+      - api-test
+      - ui-test

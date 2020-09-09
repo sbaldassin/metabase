@@ -1,0 +1,16 @@
+version: '3'
+services:
+  metabase:
+    image: metabase/metabase
+    restart: always
+
+  tests:
+    image: cypress/included:3.2.0
+    working_dir: /app
+    environment:
+      - CYPRESS_baseUrl=http://metabase:3000
+    command: npx cypress run --spec \"cypress/integration/metabase-ui-test.js
+    volumes:
+      - ./cypress:/app/cypress
+      - ./cypress.json:/app/cypress.json
+

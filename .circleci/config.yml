@@ -2,14 +2,19 @@ version: 2.1
 orbs:
   cypress: cypress-io/cypress@1
 
-executors:
-  default:
+jobs:
+  ui-tests:
     machine:
-
-workflows:
-  build:
-    jobs:
+      image: ubuntu-1604:202007-01
+    steps:
+      - checkout
+      - cypress/install
       - cypress/run:
-          executor: default
           start: docker run -p 3000:3000  metabase/metabase
           wait-on: 'http://localhost:3000'
+
+
+workflows:
+  tests:
+    jobs:
+      - ui-tests

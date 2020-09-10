@@ -20,9 +20,18 @@ describe('Metabase UI tests', () => {
         cy.get('input[name=name]').clear()
         cy.get('input[name=name]').type("Total Orders");
         cy.get('button').contains('Save').click();
-        cy.get('button').contains('Yes please!').click();
 
-        cy.get('h4').contains('Create a new dashboard').click();
+        cy.get('div[id="QuestionSavedModal"]').should('have.length', 1);
+        cy.get('div[id="QuestionSavedModal"]').within(() => {
+          cy.get('button').should('have.length', 2);
+          cy.get('button').contains('Yes please!').click();
+        });
+
+        cy.get('div[id="AddToDashSelectDashModal"]').should('have.length', 1);
+        cy.get('div[id="AddToDashSelectDashModal"]').within(() => {
+          cy.get('h4').contains('Create a new dashboard').click();
+        });
+
         cy.get('input[name=name]').type("An awesome dashboard");
         cy.get('button').contains('Create').click();  
       })

@@ -35,3 +35,4 @@ workflows:
     jobs:
       - api-test
       - ui-test
+      - db-test

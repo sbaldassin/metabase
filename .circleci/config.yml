@@ -13,6 +13,15 @@ jobs:
           name: "Run api tests"
           command: |
             script/run_api_tests.sh
+ db-test:
+   machine:
+     image: ubuntu-1604:201903-01
+   steps:
+      - checkout
+      - run:
+          name: "Run db tests"
+          command: |
+            script/run_db_tests.sh
  ui-test:
    machine: true
    steps:

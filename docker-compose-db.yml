@@ -1,0 +1,14 @@
+version: '3.2'
+services:
+  mongo:
+    image: metabase/qa-databases:mongo-sample-4.0
+  metabase:
+    image: metabase/metabase
+  cypress:
+    entrypoint: bash -c "npm install --save-dev cypress && sleep 30 && npx cypress run --spec /e2e/cypress/integration/metabase-db-test.js"
+    image: "cypress/base:10"
+    environment:
+      - CYPRESS_baseUrl=http://metabase:3000
+    working_dir: /e2e
+    volumes:
+      - ./:/e2e

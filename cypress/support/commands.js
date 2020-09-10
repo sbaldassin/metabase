@@ -5,7 +5,7 @@ Cypress.Commands.add("getSetupToken", () => {
     })
 });
 
-Cypress.Commands.add("provisionMetabase", () => {
+Cypress.Commands.add("provisionMetabase", (provision_mongo=false) => {
     cy.getSetupToken().then(properties => {
         let user = {
           "database": null,
@@ -22,6 +22,28 @@ Cypress.Commands.add("provisionMetabase", () => {
             "site_name": "balda.com"
           },
           "token": properties["setup-token"]
+        }
+
+        if (provision_mongo) {
+          user["database"] = {
+            "auto_run_queries": true,
+            "details": {
+              "additional-options": null,
+              "authdb": "admin",
+              "dbname": "sample",
+              "host": "mongo",
+              "pass": "metasample123",
+              "port": 27017,
+              "ssl": false,
+              "tunnel-enabled": false,
+              "use-connection-uri": false,
+              "use-srv": false,
+              "user": "metabase"
+            },            
+            "engine": "mongo",
+            "is_full_sync": true,
+            "name": "balda"
+          };
         }
   
         cy.request('POST', '/api/setup', user).then((response) => {
